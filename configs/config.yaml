@@ -1,0 +1,25 @@
+defaults:
+  - db: mysql
+  - ui: full
+  - schema: school
+  - _self_
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
+
+db:
+  user: root
+
+val: ${db.user}
+
+name: test2
+
+# all hydra configurations
+hydra:
+  run:
+    dir: experiments/${name}
+  sweep:
+    dir: experiments/${name}
+    subdir: ${hydra.job.num}
+  job:
+    name: ${name}
+    chdir: true
